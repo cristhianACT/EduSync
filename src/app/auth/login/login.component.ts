@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
 
@@ -86,8 +86,13 @@ import { CommonModule } from '@angular/common';
   `
 })
 export class LoginComponent {
+  constructor(private router: Router) { }
+
   onSubmit(event: Event) {
     event.preventDefault();
     console.log('Login attempt');
+    // Simular login exitoso y redirigir al home
+    this.router.navigate(['/home']);
   }
 }
+
