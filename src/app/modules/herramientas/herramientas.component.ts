@@ -9,20 +9,19 @@ import { Tool } from '../../core/models/tool.model';
 import { ToolService } from '../../core/services/tool.service';
 
 @Component({
-    selector: 'app-home',
+    selector: 'app-herramientas',
     standalone: true,
     imports: [
         CommonModule,
-
         SidebarComponent,
         HeaderComponent,
         ToolCardComponent,
         CategoryFilterComponent
     ],
-    templateUrl: './home.component.html',
-    styleUrls: ['./home.component.css']
+    templateUrl: './herramientas.component.html',
+    styleUrls: ['./herramientas.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HerramientasComponent implements OnInit {
     userName = 'Pen Gristeio';
     sidebarOpen = true;
     selectedCategory = 'Todos';
@@ -34,27 +33,6 @@ export class HomeComponent implements OnInit {
         { id: 'Evaluación', label: 'Evaluación', color: 'green' },
         { id: 'Apoyo Visual', label: 'Apoyo Visual', color: 'blue' },
         { id: 'Juegos', label: 'Juegos', color: 'pink' }
-    ];
-
-    quickActions = [
-        {
-            title: 'Crea tu sesión',
-            icon: 'document',
-            color: 'bg-blue-50',
-            iconColor: 'text-blue-600'
-        },
-        {
-            title: 'Revisa tus documentos',
-            icon: 'folder',
-            color: 'bg-purple-50',
-            iconColor: 'text-purple-600'
-        },
-        {
-            title: 'Conversa con Kali',
-            icon: 'chat',
-            color: 'bg-pink-50',
-            iconColor: 'text-pink-600'
-        }
     ];
 
     tools: Tool[] = [];
@@ -75,10 +53,6 @@ export class HomeComponent implements OnInit {
 
     get filteredTools() {
         return this.toolService.getToolsByCategory(this.selectedCategory);
-    }
-
-    get favoriteTools() {
-        return this.toolService.getFavoriteTools();
     }
 
     toggleFavorite(tool: Tool) {
