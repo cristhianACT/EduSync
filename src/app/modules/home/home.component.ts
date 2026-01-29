@@ -1,28 +1,28 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
-interface Tool {
-    id: number;
-    name: string;
-    description: string;
-    category: string;
-    icon: string;
-    color: string;
-    isFavorite: boolean;
-}
+import { SidebarComponent } from '../../shared/components/layout/sidebar/sidebar.component';
+import { HeaderComponent } from '../../shared/components/layout/header/header.component';
+import { ToolCardComponent } from '../../shared/components/cards/tool-card/tool-card.component';
+import { CategoryFilterComponent } from '../../shared/components/ui/category-filter/category-filter.component';
+import { Tool } from '../../core/models/tool.model';
 
 @Component({
     selector: 'app-home',
     standalone: true,
-    imports: [CommonModule, RouterLink],
+    imports: [
+        CommonModule,
+
+        SidebarComponent,
+        HeaderComponent,
+        ToolCardComponent,
+        CategoryFilterComponent
+    ],
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
     userName = 'Pen Gristeio';
-    userAvatar = '/assets/image/avatar.jpg';
-
     sidebarOpen = true;
     selectedCategory = 'Todos';
 
@@ -113,21 +113,6 @@ export class HomeComponent {
         }
     ];
 
-    menuItems = [
-        { icon: 'home', label: 'Inicio', active: true, route: '/home' },
-        { icon: 'tools', label: 'Herramientas', active: false, route: '/herramientas' },
-        { icon: 'chat', label: 'Kali Chat', active: false, route: '/chat' },
-        { icon: 'folder', label: 'Documentos', active: false, route: '/documentos' },
-        { icon: 'users', label: 'Kali Salas', active: false, route: '/salas' }
-    ];
-
-    moreMenuItems = [
-        { icon: 'bookmark', label: 'Referidos', route: '/referidos' },
-        { icon: 'book', label: 'Formato escolar', route: '/formato' },
-        { icon: 'help', label: 'Centro de ayuda', route: '/ayuda' },
-        { icon: 'users-group', label: 'Comunidad', route: '/comunidad' }
-    ];
-
     toggleSidebar() {
         this.sidebarOpen = !this.sidebarOpen;
     }
@@ -149,9 +134,5 @@ export class HomeComponent {
 
     toggleFavorite(tool: Tool) {
         tool.isFavorite = !tool.isFavorite;
-    }
-
-    getUserInitials(): string {
-        return this.userName.split(' ').map(n => n[0]).join('');
     }
 }
