@@ -28,6 +28,6 @@ export class SidebarComponent {
   ];
 
   getUserInitials(): string {
-      return this.userName.split(' ').map(n => n[0]).join('');
+    return this.userName.split(' ').map(n => n[0]).join('');
   }
 }
