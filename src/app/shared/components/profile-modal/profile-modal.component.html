@@ -150,6 +150,354 @@
                 </div>
             </div>
 
+            <!-- Personalización Tab -->
+            <div *ngIf="activeTab === 'Personalización'" class="w-full animate-fade-in-up">
+
+                <!-- Setup Wizard (Steps 1-6) -->
+                <div *ngIf="!isPersonalizationComplete" class="max-w-2xl mx-auto">
+                    <!-- Progress Bar -->
+                    <div class="mb-12">
+                        <div class="relative h-4 w-full bg-gray-100 rounded-full overflow-hidden">
+                            <div class="absolute top-0 left-0 h-full bg-[#ff7b7b] transition-all duration-500 ease-out"
+                                [style.width.%]="personalizationProgress"></div>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <span class="text-[10px] font-bold text-gray-500">{{ personalizationProgress }}%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 1 Content -->
+                    <div *ngIf="currentStep === 1" class="space-y-8 text-center">
+                        <div class="flex flex-col items-center gap-4 mb-8">
+                            <div class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-slate-700 font-display">
+                                ¿Qué materias y grados enseñas principalmente?
+                            </h2>
+                            <p class="text-slate-500">¡Cuéntanos con todo el detalle posible!</p>
+                        </div>
+
+                        <div class="grid gap-6 text-left">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="space-y-2">
+                                    <label class="text-sm font-semibold text-gray-700">Nivel</label>
+                                    <select
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-[#ff7b7b] focus:ring-1 focus:ring-[#ff7b7b] bg-white text-gray-400">
+                                        <option>Elige el nivel...</option>
+                                        <option>Primaria</option>
+                                        <option>Secundaria</option>
+                                    </select>
+                                </div>
+                                <div class="space-y-2">
+                                    <label class="text-sm font-semibold text-gray-700">Grado</label>
+                                    <select
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-[#ff7b7b] focus:ring-1 focus:ring-[#ff7b7b] bg-white text-gray-400">
+                                        <option>Elige el grado...</option>
+                                        <option>1° Grado</option>
+                                        <option>2° Grado</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="space-y-2">
+                                <label class="text-sm font-semibold text-gray-700">Área</label>
+                                <select
+                                    class="w-full px-4 py-3 rounded-xl border border-[#ff7b7b] outline-none focus:border-[#ff7b7b] focus:ring-1 focus:ring-[#ff7b7b] bg-white text-gray-400">
+                                    <option>Elige el área...</option>
+                                    <option>Matemáticas</option>
+                                    <option>Comunicación</option>
+                                </select>
+                            </div>
+
+                            <div class="flex flex-col gap-3 py-2">
+                                <div class="flex items-center gap-3">
+                                    <input type="checkbox" id="additionalInfo"
+                                        (change)="showAdditionalInfo = !showAdditionalInfo"
+                                        [checked]="showAdditionalInfo"
+                                        class="w-5 h-5 rounded border-gray-300 text-[#ff7b7b] focus:ring-[#ff7b7b] cursor-pointer">
+                                    <label for="additionalInfo"
+                                        class="text-sm text-gray-600 font-medium cursor-pointer">
+                                        ¿Quieres añadir información adicional?
+                                    </label>
+                                </div>
+
+                                <!-- Textarea for additional information -->
+                                <div *ngIf="showAdditionalInfo" class="animate-fade-in-up">
+                                    <textarea
+                                        placeholder='{ "Matemáticas para 2do y 3ro de media" o "Todas las de 4to de primaria" }.'
+                                        class="w-full px-4 py-3 rounded-xl border border-gray-200 outline-none focus:border-[#ff7b7b] focus:ring-1 focus:ring-[#ff7b7b] bg-white text-gray-600 text-sm min-h-[100px] resize-none placeholder:text-gray-300"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="pt-6">
+                            <button (click)="nextStep()"
+                                class="w-full bg-[#ff7b7b] hover:bg-[#ff6161] text-white py-4 rounded-2xl font-bold shadow-lg shadow-red-500/20 transform hover:-translate-y-0.5 transition-all text-lg">
+                                Continuar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 Content -->
+                    <div *ngIf="currentStep === 2" class="space-y-8 text-center animate-fade-in-up relative">
+                        <!-- Back Button -->
+                        <button (click)="prevStep()"
+                            class="absolute -top-12 left-0 text-gray-400 hover:text-gray-600 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                        </button>
+
+                        <div class="flex flex-col items-center gap-4 mb-8">
+                            <div class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-slate-700 font-display">
+                                ¿Cómo son tus estudiantes?
+                            </h2>
+                            <p class="text-slate-500 max-w-md mx-auto leading-relaxed">
+                                Esto es clave. Cuéntanos todo lo necesario para que podamos ayudarte con recomendaciones
+                                hechas a su medida.
+                            </p>
+                        </div>
+
+                        <div class="text-left">
+                            <textarea
+                                placeholder='{"Grupos grandes (40+)", "Se distraen fácilmente", "Muy participativos y curiosos", "Varios niveles en un mismo salón"}.'
+                                class="w-full px-6 py-5 rounded-2xl border border-gray-200 outline-none focus:border-[#ff7b7b] focus:ring-1 focus:ring-[#ff7b7b] bg-white text-gray-600 text-sm min-h-[160px] resize-none placeholder:text-gray-300 leading-relaxed"></textarea>
+                        </div>
+
+                        <div class="pt-6">
+                            <button (click)="nextStep()"
+                                class="w-full bg-[#ff7b7b] hover:bg-[#ff6161] text-white py-4 rounded-2xl font-bold shadow-lg shadow-red-500/20 transform hover:-translate-y-0.5 transition-all text-lg">
+                                Continuar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 Content -->
+                    <div *ngIf="currentStep === 3" class="space-y-8 text-center animate-fade-in-up relative">
+                        <!-- Back Button -->
+                        <button (click)="prevStep()"
+                            class="absolute -top-12 left-0 text-gray-400 hover:text-gray-600 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                        </button>
+
+                        <div class="flex flex-col items-center gap-4 mb-8">
+                            <div class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-slate-700 font-display">
+                                ¿Cuál es tu tarea más difícil de la semana?
+                            </h2>
+                            <div class="text-slate-500 max-w-md mx-auto leading-relaxed">
+                                <p>¡Puede ser dentro o fuera del salón de clase!</p>
+                                <p>¿Qué es lo que más te consume tiempo o energía?</p>
+                            </div>
+                        </div>
+
+                        <div class="text-left">
+                            <textarea
+                                placeholder='"Planificar clases creativas", "Crear exámenes", "Lograr que participen"'
+                                class="w-full px-6 py-5 rounded-2xl border border-gray-200 outline-none focus:border-[#ff7b7b] focus:ring-1 focus:ring-[#ff7b7b] bg-white text-gray-600 text-sm min-h-[160px] resize-none placeholder:text-gray-300 leading-relaxed"></textarea>
+                        </div>
+
+                        <div class="pt-6">
+                            <button (click)="nextStep()"
+                                class="w-full bg-[#ff7b7b] hover:bg-[#ff6161] text-white py-4 rounded-2xl font-bold shadow-lg shadow-red-500/20 transform hover:-translate-y-0.5 transition-all text-lg">
+                                Continuar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 Content -->
+                    <div *ngIf="currentStep === 4" class="space-y-8 text-center animate-fade-in-up relative">
+                        <!-- Back Button -->
+                        <button (click)="prevStep()"
+                            class="absolute -top-12 left-0 text-gray-400 hover:text-gray-600 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                        </button>
+
+                        <div class="flex flex-col items-center gap-4 mb-8">
+                            <div class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-slate-700 font-display">
+                                ¿Qué metodologías nuevas te gustaría explorar?
+                            </h2>
+                            <div class="text-slate-500 max-w-md mx-auto leading-relaxed">
+                                <p>¿Hay algo que te llame la atención?</p>
+                                <p>Cuéntanos tu interés pedagógico</p>
+                            </div>
+                        </div>
+
+                        <div class="text-left">
+                            <textarea placeholder='"Gamificación", "ABP (Proyectos)", "Aula Invertida", "IA en el aula"'
+                                class="w-full px-6 py-5 rounded-2xl border border-red-300 outline-none focus:border-[#ff7b7b] focus:ring-1 focus:ring-[#ff7b7b] bg-white text-gray-600 text-sm min-h-[160px] resize-none placeholder:text-gray-300 leading-relaxed"></textarea>
+                        </div>
+
+                        <div class="pt-6">
+                            <button (click)="nextStep()"
+                                class="w-full bg-[#ff7b7b] hover:bg-[#ff6161] text-white py-4 rounded-2xl font-bold shadow-lg shadow-red-500/20 transform hover:-translate-y-0.5 transition-all text-lg">
+                                Continuar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 Content -->
+                    <div *ngIf="currentStep === 5" class="space-y-8 text-center animate-fade-in-up relative">
+                        <!-- Back Button -->
+                        <button (click)="prevStep()"
+                            class="absolute -top-12 left-0 text-gray-400 hover:text-gray-600 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                        </button>
+
+                        <div class="flex flex-col items-center gap-4 mb-8">
+                            <div class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h2 class="text-2xl font-bold text-slate-700 font-display">
+                                ¿En qué una cosa debe enfocarse Kali?
+                            </h2>
+                            <div class="text-slate-500 max-w-md mx-auto leading-relaxed">
+                                <p>¿Cuál es tu objetivo principal?</p>
+                            </div>
+                        </div>
+
+                        <div class="text-left">
+                            <textarea
+                                placeholder='"Ahorrarme tiempo", "Darme ideas más creativas", "Mejorar la participación de mis alumnos"'
+                                class="w-full px-6 py-5 rounded-2xl border border-gray-200 outline-none focus:border-[#ff7b7b] focus:ring-1 focus:ring-[#ff7b7b] bg-white text-gray-600 text-sm min-h-[160px] resize-none placeholder:text-gray-300 leading-relaxed"></textarea>
+                        </div>
+
+                        <div class="pt-6">
+                            <button (click)="nextStep()"
+                                class="w-full bg-[#ff7b7b] hover:bg-[#ff6161] text-white py-4 rounded-2xl font-bold shadow-lg shadow-red-500/20 transform hover:-translate-y-0.5 transition-all text-lg">
+                                Continuar
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Step 6 Content (Final) -->
+                    <div *ngIf="currentStep === 6" class="space-y-8 text-center animate-fade-in-up relative">
+                        <!-- Back Button -->
+                        <button (click)="prevStep()"
+                            class="absolute -top-12 left-0 text-gray-400 hover:text-gray-600 transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                            </svg>
+                        </button>
+
+                        <div class="flex flex-col items-center gap-4 mb-8 py-12">
+                            <div class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center mb-4">
+                                <svg class="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                    </path>
+                                </svg>
+                            </div>
+                            <h2 class="text-3xl font-bold text-[#4a6da7] font-display">
+                                ¡Gracias por tus respuestas!
+                            </h2>
+                            <div class="text-slate-600 max-w-sm mx-auto leading-relaxed space-y-2">
+                                <p class="font-medium">Estás a un solo clic de tener un Kali 100% personalizado para ti.
+                                </p>
+                                <p class="text-sm">Presiona el botón para guardar tu perfil.</p>
+                            </div>
+                        </div>
+
+                        <div class="pt-6">
+                            <button (click)="finishPersonalization()"
+                                class="w-full bg-[#ff7b7b] hover:bg-[#ff6161] text-white py-4 rounded-2xl font-bold shadow-lg shadow-red-500/20 transform hover:-translate-y-0.5 transition-all text-lg">
+                                Calibrar a Kalitutor
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Final Summary (Memoria) -->
+                <div *ngIf="activeTab === 'Personalización' && isPersonalizationComplete"
+                    class="w-full max-w-4xl mx-auto py-2 animate-fade-in-up">
+                    <h2 class="text-4xl font-bold text-[#4a6da7] mb-2 font-display">Personalización</h2>
+                    <p class="text-slate-500 mb-12">Personaliza tu perfil para obtener mejores resultados en Califica
+                    </p>
+
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-bold text-slate-800">Memoria</h3>
+                        <button
+                            class="w-8 h-8 rounded-full border-2 border-red-200 flex items-center justify-center text-red-400 hover:bg-red-300 group transition-all">
+                            <svg class="w-5 h-5 group-hover:scale-110 transition-transform" fill="none"
+                                stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                                    d="M12 4v16m8-8H4" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div class="bg-white rounded-3xl border border-gray-100 overflow-hidden shadow-sm">
+                        <div *ngFor="let item of memoriaItems; let last = last"
+                            class="group flex items-center justify-between p-6 bg-white hover:bg-slate-50 transition-colors"
+                            [class.border-b]="!last" [class.border-gray-50]="!last">
+                            <p class="text-slate-600 flex-1 pr-8 leading-relaxed">{{ item }}</p>
+                            <div class="flex items-center gap-3 opacity-30 group-hover:opacity-100 transition-opacity">
+                                <button
+                                    class="p-2 text-gray-300 hover:text-[#4a6da7] hover:bg-white rounded-lg transition-all">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                                    </svg>
+                                </button>
+                                <button
+                                    class="p-2 text-gray-300 hover:text-red-500 hover:bg-white rounded-lg transition-all">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-4v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Profesión Tab -->
             <div *ngIf="activeTab === 'Profesión'" class="max-w-2xl animate-fade-in-up">
                 <h2 class="text-3xl font-bold text-slate-800 mb-2 font-display">Edita tu profesión</h2>
@@ -232,7 +580,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="font-bold text-gray-900 text-sm">cartalle72000@gmail.com</h3>
+                                <h3 class="font-bold text-gray-900 text-sm">kchaabuelas@gmail.com</h3>
                                 <p class="text-xs text-gray-500">Cuenta conectada</p>
                             </div>
                         </div>
