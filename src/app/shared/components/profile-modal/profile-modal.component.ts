@@ -18,7 +18,7 @@ export class ProfileModalComponent {
         { label: 'Cuenta', icon: 'cog' }
     ];
 
-    activeTab = 'Perfil';
+    activeTab: string = 'Perfil';
     currentStep = 1;
     totalSteps = 6;
     showAdditionalInfo = false;
