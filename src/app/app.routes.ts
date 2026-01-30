@@ -5,7 +5,7 @@ import { HomeComponent } from './modules/home/home.component';
 import { HerramientasComponent } from './modules/herramientas/herramientas.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' }, // Redirigir por defecto al home
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, // Redirigir por defecto al home
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
