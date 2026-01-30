@@ -10,6 +10,7 @@ import { RouterLink, RouterModule } from '@angular/router';
 })
 export class SidebarComponent {
   @Input() isOpen = true;
+  @Input() userName: string = '';
 
 
   menuItems = [
