@@ -15,8 +15,7 @@ export class ProfileModalComponent {
         { label: 'Personalización', icon: 'adjustments' },
         { label: 'Profesión', icon: 'briefcase' },
         { label: 'Suscripción', icon: 'credit-card' },
-        { label: 'Cuenta', icon: 'cog' },
-        { label: 'Mis Certificados', icon: 'academic-cap' }
+        { label: 'Cuenta', icon: 'cog' }
     ];
 
     activeTab = 'Perfil';
