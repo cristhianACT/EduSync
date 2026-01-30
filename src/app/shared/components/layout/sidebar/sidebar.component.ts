@@ -10,14 +10,14 @@ import { RouterLink, RouterModule } from '@angular/router';
 })
 export class SidebarComponent {
   @Input() isOpen = true;
-  @Input() userName = 'User Name';
+
 
   menuItems = [
-    { icon: 'home', label: 'Inicio', active: true, route: '/home' },
-    { icon: 'tools', label: 'Herramientas', active: false, route: '/herramientas' },
-    { icon: 'chat', label: 'Kali Chat', active: false, route: '/chat' },
-    { icon: 'folder', label: 'Documentos', active: false, route: '/documentos' },
-    { icon: 'users', label: 'Kali Salas', active: false, route: '/salas' }
+    { icon: 'home', label: 'Inicio', route: '/home' },
+    { icon: 'tools', label: 'Herramientas', route: '/herramientas' },
+    { icon: 'chat', label: 'Kali Chat', route: '/chat' },
+    { icon: 'folder', label: 'Documentos', route: '/documentos' },
+    { icon: 'users', label: 'Kali Salas', route: '/salas' }
   ];
 
   moreMenuItems = [
@@ -27,7 +27,5 @@ export class SidebarComponent {
     { icon: 'users-group', label: 'Comunidad', route: '/comunidad' }
   ];
 
-  getUserInitials(): string {
-    return this.userName.split(' ').map(n => n[0]).join('');
-  }
+
 }

@@ -13,6 +13,6 @@ export class HeaderComponent {
   @Output() toggleSidebar = new EventEmitter<void>();
 
   getUserInitials(): string {
-      return this.userName.split(' ').map(n => n[0]).join('');
+    return this.userName.split(' ').map(n => n[0]).join('');
   }
 }
