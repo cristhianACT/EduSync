@@ -38,11 +38,13 @@
         </button>
 
         <!-- User Avatar -->
-        <div
-          class="w-10 h-10 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold cursor-pointer">
+        <div (click)="toggleProfileModal()"
+          class="w-10 h-10 bg-gradient-to-br from-orange-400 to-pink-500 rounded-full flex items-center justify-center text-white font-semibold cursor-pointer hover:shadow-lg transition-all transform hover:scale-105 active:scale-95">
           {{ getUserInitials() }}
         </div>
       </div>
     </div>
   </div>
+
+  <app-profile-modal *ngIf="isProfileModalOpen" (close)="isProfileModalOpen = false"></app-profile-modal>
 </header>
