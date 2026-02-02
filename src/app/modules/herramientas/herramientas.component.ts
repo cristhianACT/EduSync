@@ -55,6 +55,10 @@ export class HerramientasComponent implements OnInit {
         return this.toolService.getToolsByCategory(this.selectedCategory);
     }
 
+    get favoriteTools() {
+        return this.toolService.getFavoriteTools();
+    }
+
     toggleFavorite(tool: Tool) {
         this.toolService.toggleFavorite(tool.id);
     }

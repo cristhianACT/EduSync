@@ -11,7 +11,7 @@
     <div class="p-8">
       <!-- Quick Actions -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div *ngFor="let action of quickActions" [class]="action.color"
+        <div *ngFor="let action of quickActions" [class]="action.color" (click)="handleAction(action)"
           class="p-6 rounded-xl cursor-pointer hover:shadow-lg transition-all border border-gray-200">
           <div class="flex items-center gap-4">
             <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-sm">
@@ -30,9 +30,11 @@
       </div>
 
       <!-- Favorites Section -->
-      <section class="mb-8" *ngIf="favoriteTools.length > 0">
+      <section class="mb-12">
         <h2 class="text-xl font-bold text-gray-900 mb-4">Mis favoritos</h2>
-        <div class="bg-white rounded-xl p-6 border border-gray-200">
+
+        <!-- Empty State (Shown when no favorites) -->
+        <div *ngIf="favoriteTools.length === 0" class="bg-white rounded-xl p-6 border border-gray-200">
           <div class="flex items-center gap-3 text-gray-500">
             <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -40,9 +42,15 @@
             </svg>
             <div>
               <p class="font-medium text-gray-900">¡Tus herramientas favoritas aquí!</p>
-              <p class="text-sm">Haz clic en la estrella de una herramienta y guárdala añádela.</p>
+              <p class="text-sm">Haz clic en la estrella de una herramienta para guardarla en tus favoritos.</p>
             </div>
           </div>
+        </div>
+
+        <!-- Favorites Grid (Shown when there are favorites) -->
+        <div *ngIf="favoriteTools.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <app-tool-card *ngFor="let tool of favoriteTools" [tool]="tool" (toggleFavorite)="toggleFavorite($event)">
+          </app-tool-card>
         </div>
       </section>
 

@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Tool } from '../models/tool.model';
 
 @Injectable({
@@ -62,7 +63,30 @@ export class ToolService {
         }
     ];
 
-    constructor() { }
+    constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+        this.loadFavorites();
+    }
+
+    private loadFavorites(): void {
+        if (isPlatformBrowser(this.platformId)) {
+            const savedFavorites = localStorage.getItem('favoriteTools');
+            if (savedFavorites) {
+                const favoriteIds = JSON.parse(savedFavorites) as number[];
+                this.tools.forEach(tool => {
+                    tool.isFavorite = favoriteIds.includes(tool.id);
+                });
+            }
+        }
+    }
+
+    private saveFavorites(): void {
+        if (isPlatformBrowser(this.platformId)) {
+            const favoriteIds = this.tools
+                .filter(tool => tool.isFavorite)
+                .map(tool => tool.id);
+            localStorage.setItem('favoriteTools', JSON.stringify(favoriteIds));
+        }
+    }
 
     getAllTools(): Tool[] {
         return this.tools;
@@ -83,6 +107,7 @@ export class ToolService {
         const tool = this.tools.find(t => t.id === toolId);
         if (tool) {
             tool.isFavorite = !tool.isFavorite;
+            this.saveFavorites();
         }
     }
 

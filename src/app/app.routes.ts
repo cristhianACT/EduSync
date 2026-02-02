@@ -3,6 +3,7 @@ import { LoginComponent } from './modules/auth/login/login.component';
 import { RegisterComponent } from './modules/auth/register/register.component';
 import { HomeComponent } from './modules/home/home.component';
 import { HerramientasComponent } from './modules/herramientas/herramientas.component';
+import { SesionAprendizajeComponent } from './modules/planificacion/sesion-aprendizaje/sesion-aprendizaje.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' }, // Redirigir por defecto al home
@@ -10,5 +11,6 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home', component: HomeComponent },
   { path: 'herramientas', component: HerramientasComponent },
+  { path: 'planificacion/sesion-aprendizaje', component: SesionAprendizajeComponent },
   // Aquí agregaremos luego más rutas protegidas
 ];
